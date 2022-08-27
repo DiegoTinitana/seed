@@ -1,0 +1,42 @@
+{
+  "name": "newfact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.ts",
+    "start": "npm run migrate && npm run seed && node ./dist/server.js",
+    "build": "tsc --target es2016 --experimentalDecorators --emitDecoratorMetadata",
+    "lint": "eslint . --ext .ts",
+    "migrate": "typeorm-ts-node-commonjs migration:run -d src/db/ormconfig.ts",
+    "seed": "typeorm-ts-node-commonjs migration:run -d src/db/ormconfigseed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "4.18.1",
+    "http-status-codes": "^2.2.0",
+    "install": "^0.13.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "npm": "^8.17.0",
+    "pg": "^8.7.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.7"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "18.0.3",
+    "@typescript-eslint/eslint-plugin": "5.30.6",
+    "@typescript-eslint/parser": "5.30.6",
+    "eslint": "8.19.0",
+    "nodemon": "^2.0.19",
+    "ts-node-dev": "2.0.0",
+    "typescript": "4.7.4"
+  }
+}
