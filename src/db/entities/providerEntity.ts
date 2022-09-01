@@ -3,7 +3,7 @@ import { AddressEntity } from './addressEntity';
 import { PersonEntity } from './person';
 import { PhoneEntity } from './phoneEntity';
 
-@Entity('users')
+@Entity('provider')
 export class ProviderEntity extends PersonEntity {
 
   @Column()

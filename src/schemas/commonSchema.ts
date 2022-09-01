@@ -5,5 +5,3 @@ export const CommonSchema = Joi.object().keys({
   value: Joi.string().required(),
   description: Joi.string().allow(null),
 });
-
-export const userId = Joi.string().guid();

@@ -15,6 +15,12 @@ export class CommonEntity {
   @Column({ nullable: true })
   description?: string;
 
+  @Column()
+  createdBy!: string;
+
+  @Column({ nullable: true })
+  updatedBy!: string;
+
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
   createdAt!: Date;
 

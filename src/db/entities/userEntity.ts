@@ -11,10 +11,10 @@ export class UserEntity extends PersonEntity {
   @Column('jsonb', { nullable: true })
   roles!: string[];
 
-  @OneToMany(() => PhoneEntity, (phone: PhoneEntity) => phone.user)
+  @OneToMany(() => PhoneEntity, (phone: PhoneEntity) => phone.user, {eager: true, cascade: true})
   phones!: PhoneEntity[];
 
-  @OneToMany(() => AddressEntity, (address: AddressEntity) => address.user)
+  @OneToMany(() => AddressEntity, (address: AddressEntity) => address.user, {eager: true, cascade: true})
   addresses!: AddressEntity[];
 }
 

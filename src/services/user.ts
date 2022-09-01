@@ -3,41 +3,21 @@ import bcrypt from 'bcrypt';
 
 import { UserEntity } from '../db/entities/userEntity';
 import { NewUserI, UserI } from '../interfaces/user';
-import { createPhoneWithQueryRunner } from './phone';
-import { createAddressWithQueryRunner } from './address';
 import InvoiceError from '../utils/invoiceError';
 import { findRoles } from './role';
 import { errorType } from '../utils/erroTypes';
 
 export const createUser = async (user: NewUserI): Promise<void> => {
-  const queryRunner = AppDataSource.createQueryRunner();
-  await queryRunner.startTransaction();
+  const queryRunner = AppDataSource.getRepository(UserEntity);
 
   try {
-    const newUser = new UserEntity();
-    newUser.name = user.name;
-    newUser.lastName = user.lastName;
-    newUser.email = user.email;
-    newUser.phones = await createPhoneWithQueryRunner(queryRunner, user.phones);
-    newUser.addresses = await createAddressWithQueryRunner(
-      queryRunner,
-      user.addresses
-    );
-    newUser.password = bcrypt.hashSync(user.password, 10);
-    newUser.dni = user.dni;
-    newUser.roles = user.roles;
-    newUser.createdBy = user.createdBy;
-
-    const userCreated = await queryRunner.manager.save(newUser);
+    user.password =  bcrypt.hashSync(user.password, 10);
+    const userCreated = await queryRunner.save(user);
     console.log(
       `user_service: createUser, usercreated with id: ${userCreated.id}`
     );
-    await queryRunner.commitTransaction();
   } catch (err) {
-    await queryRunner.rollbackTransaction();
     throw new InvoiceError('db', '', err);
-  } finally {
-    await queryRunner.release();
   }
 };
 

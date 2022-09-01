@@ -6,6 +6,8 @@ import { IdSchema } from '../schemas/idSchema';
 import * as userService from '../services/user';
 
 import { validator } from '../utils/validate';
+import { CommonI } from '../interfaces/user';
+import { addCreatedAndUpdatedByToSchema } from '../utils/utils';
 
 export const createUser = async (
   req: Request,
@@ -15,6 +17,8 @@ export const createUser = async (
   try {
     const { body } = req;
     await validator(UserSchema, body);
+    body.addresses = addCreatedAndUpdatedByToSchema(body.addresses, body.createdBy, body.updatedBy);
+    body.phones = addCreatedAndUpdatedByToSchema(body.phones, body.createdBy, body.updatedBy);
     await userService.createUser(body);
     res.status(httpStatus.CREATED).send('User Created');
   } catch (error) {
@@ -29,7 +33,6 @@ export const getAllUsers = async (
 ): Promise<void> => {
   try {
     const users = await userService.getAllUsers();
-    console.log(users);
     res.status(httpStatus.CREATED).send(users);
   } catch (error) {
     next(error);
@@ -74,7 +77,10 @@ export const deleteUserById = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { params, body: {updatedBy} } = req;
+    const {
+      params,
+      body: { updatedBy },
+    } = req;
     await validator(IdSchema, params);
     await userService.deactivateUserById(params.id, updatedBy);
     res.status(httpStatus.OK).send('User deativated');

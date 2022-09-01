@@ -10,6 +10,8 @@ export const checkAccess = async (req: any, res: Response, next: NextFunction): 
       headers: { user }
     } = req;
 
+    console.log(user);
+
     const hasAccess = await findAccessByUrlAndMethod(path, method, user.roles);
 
     if (!hasAccess) {
