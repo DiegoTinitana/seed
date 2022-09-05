@@ -49,8 +49,22 @@ export class insertRolToAccess1661168420066 implements MigrationInterface {
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/role/:id', 'GET',  '[${all}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/role/:id', 'PUT',  '[${adminAndSuperAdmin}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/role/:id', 'DELETE',  '[${superAdmin}]')`);
+        /*items*/
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item', 'POST',  '[${adminAndSuperAdmin}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/:id', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/code', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/:id', 'PUT',  '[${adminAndSuperAdmin}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/:id', 'DELETE',  '[${superAdmin}]')`);
+        /*category*/
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category', 'POST',  '[${adminAndSuperAdmin}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category/:id', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category/:id', 'PUT',  '[${adminAndSuperAdmin}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category/:id', 'DELETE',  '[${superAdmin}]')`);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public async down(queryRunner: QueryRunner): Promise<void> {
     }
 }

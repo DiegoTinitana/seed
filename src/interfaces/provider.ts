@@ -1,12 +1,10 @@
-import { CommonEnum } from './common';
 import { CommonI } from './user';
 
 export interface NewProviderI {
   id?: string
-  name?: string
-  lastName?: string
-  email?: string
-  company: string
+  name: string
+  lastName: string
+  email: string
   dni: string
   createdBy: string
   isActive: boolean

@@ -1,0 +1,250 @@
+@host = http://localhost:8080
+
+### Login
+# @name login
+post {{host}}/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "test1@gmail.com",
+  "password": "test1"
+}
+
+### create User
+post {{host}}/api/user
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "test5",
+  "lastName": "test5",
+  "email": "test5@gmail.com",
+  "password": "test5",
+  "dni": "1125155434",
+  "phones": [
+    {
+      "type": "CASA",
+      "value": "577747"
+    },
+        {
+      "type": "celular",
+      "value": "0987476374"
+    }
+  ],
+  "addresses": [
+    {
+      "type": "CASA",
+      "value": "Ciudad alegria frente al reten"
+    }
+  ],
+  "roles": [
+    "1ec955d8-4e17-46ea-aeb9-9b8d3b1dbce3"
+  ]
+}
+
+### get Users
+@token = {{login.response.body.credential.token}}
+###
+get {{host}}/api/user
+token: bearer {{token}}
+
+### get User by Id
+get {{host}}/api/user/1bc81c05-c5da-43aa-b8ac-b13f24e50cc1
+token: bearer {{token}}
+
+### update User
+put {{host}}/api/user/1bc81c05-c5da-43aa-b8ac-b13f24e50cc1
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Diegoooo",
+  "lastName": "tinitana",
+  "email": "test4@gmail.com",
+  "dni": "1125154476",
+  "isActive": true,
+  "roles": [
+    "05bee02e-4ad7-47ae-b776-ab621e04d42f"
+  ]
+}
+
+### delete user
+delete {{host}}/api/user/6c34b8d5-c7f2-4bfb-8a38-72205dc31c0c
+token: bearer {{token}}
+
+###client
+post {{host}}/api/client
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "test5",
+  "lastName": "test5",
+  "email": "test5@gmail.com",
+  "dni": "1125155434",
+  "phone": "0987174750",
+  "address": "ciudad alegria"
+}
+
+### get clients
+get {{host}}/api/client
+token: bearer {{token}}
+
+### get client
+get {{host}}/api/client/a25444d4-6f9e-4206-a120-0367a413d84b
+token: bearer {{token}}
+
+### update client
+put {{host}}/api/client/a25444d4-6f9e-4206-a120-0367a413d84b
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "test5",
+  "lastName": "test5",
+  "email": "test5@gmail.com",
+  "dni": "1125155434",
+  "phone": "0987174750",
+  "address": "ciudad alegria Loja Ecuador"
+}
+
+### delete client
+delete {{host}}/api/client/a25444d4-6f9e-4206-a120-0367a413d84b
+token: bearer {{token}}
+
+# items
+### create
+post {{host}}/api/item
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "telefono",
+  "description": "es un telefono",
+  "code": "001",
+  "barCode": "b001",
+  "hasIva": true,
+  "purchasePrice": 20,
+  "pvps": [
+    {
+      "id": 1,
+      "value": 22,
+      "percent": 10
+    }
+  ]
+}
+
+### get
+get {{host}}/api/item
+token: bearer {{token}}
+
+### get by id
+get {{host}}/api/item/aed5e249-aaeb-4cf3-ab2e-e463ba8ab370
+token: bearer {{token}}
+
+### get by code or barcode
+get {{host}}/api/item/code
+    ?code=b001
+token: bearer {{token}}
+
+### update
+put {{host}}/api/item/aed5e249-aaeb-4cf3-ab2e-e463ba8ab370
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "telefono000000",
+  "description": "es un telefono",
+  "code": "001",
+  "barCode": "b001",
+  "hasIva": true,
+  "purchasePrice": 20
+}
+
+# close items
+
+# provider
+
+### create
+post {{host}}/api/provider
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "test5",
+  "lastName": "test5",
+  "email": "test5@gmail.com",
+  "dni": "1125155434",
+  "phones": [
+    {
+      "type": "CASA",
+      "value": "072998488737"
+    },
+        {
+      "type": "celular",
+      "value": "0988437737"
+    }
+  ],
+  "addresses": [
+    {
+      "type": "Sucursl 1",
+      "value": "frente al mercado central"
+    }
+  ],
+  "company": "Romar"
+}
+
+### get all
+get {{host}}/api/provider
+token: bearer {{token}}
+
+### get by id
+{{host}}/api/provider/a9b993cc-7f6d-4a41-9b42-9cfdbd62a65a
+token: bearer {{token}}
+
+### update
+put {{host}}/api/provider/a9b993cc-7f6d-4a41-9b42-9cfdbd62a65a
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Karina",
+  "lastName": "capombi",
+  "email": "test5@gmail.com",
+  "dni": "1125155434",
+  "company": "Romar"
+}
+
+### delete
+delete {{host}}/api/provider/a9b993cc-7f6d-4a41-9b42-9cfdbd62a65a
+token: bearer {{token}}
+
+# end provider
+
+# phone
+
+### create
+post {{host}}/api/phone
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "userId": "6c34b8d5-c7f2-4bfb-8a38-72205dc31c0c",
+  "phones": [
+    {
+      "type": "celular",
+      "value": "123456"
+    }
+  ]
+}
+
+### update
+put {{host}}/api/phone/381cb7b1-54a4-4ba5-999f-42bd1c5f1c53
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "type": "celular",
+  "value": "123456",
+  "description": "es un telefono"
+}
