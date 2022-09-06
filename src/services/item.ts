@@ -113,7 +113,7 @@ export const setItemToCategories = async (itemId: string, categories: string[]):
     const query = AppDataSource.getRepository(ItemEntity);
     await query
     .createQueryBuilder()
-    .relation(CategoryEntity, 'items')
+    .relation(ItemEntity, 'categories')
     .of(itemId)
     .add(categories);
   } catch (error) {

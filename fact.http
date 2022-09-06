@@ -119,10 +119,10 @@ token: bearer {{token}}
 Content-Type: application/json
 
 {
-  "name": "telefono",
-  "description": "es un telefono",
-  "code": "001",
-  "barCode": "b001",
+  "name": "leche",
+  "description": "es un lecje",
+  "code": "L001",
+  "barCode": "L001",
   "hasIva": true,
   "purchasePrice": 20,
   "pvps": [
@@ -159,6 +159,15 @@ Content-Type: application/json
   "barCode": "b001",
   "hasIva": true,
   "purchasePrice": 20
+}
+
+### set item to categories
+post {{host}}/api/item/categories?id=cc5a3491-dbfe-4064-86c3-03803610b3f9
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "categories" : ["d7f88e48-3274-4af4-bb82-f0d69c4a27c4", "d8979afd-c822-4934-918c-cba52bad6270"]
 }
 
 # close items
@@ -248,3 +257,49 @@ Content-Type: application/json
   "value": "123456",
   "description": "es un telefono"
 }
+
+#end phone
+
+# categories
+
+### create
+post {{host}}/api/category
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Bebidas",
+  "description": "es una descriptcion"
+}
+
+### get
+get {{host}}/api/category
+token: bearer {{token}}
+Content-Type: application/json
+
+### get by id
+get {{host}}/api/category/d8979afd-c822-4934-918c-cba52bad6270
+token: bearer {{token}}
+Content-Type: application/json
+
+### update
+put {{host}}/api/category/d8979afd-c822-4934-918c-cba52bad6270
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Calzado",
+  "description": "es una descriptcion de calzado"
+}
+
+### set category by id to items
+post {{host}}/api/category/items?id=d8979afd-c822-4934-918c-cba52bad6270
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "items" : ["aed5e249-aaeb-4cf3-ab2e-e463ba8ab370"]
+}
+
+
+

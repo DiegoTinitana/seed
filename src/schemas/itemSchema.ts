@@ -57,3 +57,10 @@ export const UpdateItemPricesSchema = Joi.object({
   .required()
   .label('Item');
 
+  export const SetItemToCategoriesSchema = Joi.object({
+    categories: Joi.array().items(Joi.string().guid()).min(1).required(),
+    createdBy: Joi.string().guid().allow(null),
+    updatedBy: Joi.string().guid().allow(null),
+  })
+    .required()
+    .label('Category');

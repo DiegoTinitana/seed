@@ -43,7 +43,7 @@ export class ItemEntity {
   @Column({ nullable: true })
   photo!: string;
 
-  @ManyToMany(() => CategoryEntity, { cascade: true })
+  @ManyToMany(() => CategoryEntity, (category) => category.items)
   @JoinTable()
   categories!: CategoryEntity[];
 }

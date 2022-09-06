@@ -3,7 +3,7 @@ import httpStatus from 'http-status-codes';
 import { CodeSchema, IdSchema } from '../schemas/idSchema';
 import * as itemService from '../services/item';
 import { validator } from '../utils/validate';
-import { ItemSchema, UpdateItemSchema } from '../schemas/itemSchema';
+import { ItemSchema, SetItemToCategoriesSchema, UpdateItemSchema } from '../schemas/itemSchema';
 import InvoiceError from '../utils/invoiceError';
 
 export const createItem = async (
@@ -84,6 +84,29 @@ export const updateItems = async (
     await itemService.updateItemById(params.id, body);
 
     res.status(httpStatus.OK).send('items Updated');
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const setItemToCategories = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const {
+      query,
+      body
+    } = req;
+    await validator(IdSchema, query);
+    await validator(SetItemToCategoriesSchema, body);
+    if(!query) {
+      throw new InvoiceError('code', 'bad Id');
+    }
+    const id = query.id ? query.id.toString() : '';
+    await itemService.setItemToCategories(id, body.categories);
+    res.status(httpStatus.NO_CONTENT).send('items was seted to category');
   } catch (error) {
     next(error);
   }

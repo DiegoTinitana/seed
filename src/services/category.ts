@@ -54,8 +54,8 @@ export const getCategories = async (): Promise<NewCategoryI[]> => {
   try {
     const query = AppDataSource.getRepository(CategoryEntity);
     return await query
-      .createQueryBuilder('category')
-      .leftJoinAndSelect('category.items', 'items')
+      .createQueryBuilder('categories')
+      .leftJoinAndSelect('categories.items', 'items')
       .getMany();
   } catch (error) {
     throw new InvoiceError(errorType.dataBase, '', error);
@@ -65,7 +65,19 @@ export const getCategories = async (): Promise<NewCategoryI[]> => {
 export const getCategoryById = async (id: string): Promise<NewCategoryI | null> => {
   try {
     const query = AppDataSource.getRepository(CategoryEntity);
-    return await query.createQueryBuilder().where('id= :id', { id }).getOne();
+    return await query.createQueryBuilder('categories')
+    .leftJoinAndSelect('categories.items', 'items')
+    .where('categories.id = :id', { id })
+    .getOne();
+  } catch (error) {
+    throw new InvoiceError(errorType.dataBase, '', error);
+  }
+};
+
+export const deleteById = async (id: string): Promise<void> => {
+  try {
+    const query = AppDataSource.getRepository(CategoryEntity);
+    await query.createQueryBuilder().delete().from(CategoryEntity).where('id= :id', { id }).execute();
   } catch (error) {
     throw new InvoiceError(errorType.dataBase, '', error);
   }
@@ -76,11 +88,10 @@ export const setCategoryToItems = async (categoryId: string, items: string[]): P
     const query = AppDataSource.getRepository(CategoryEntity);
     await query
     .createQueryBuilder()
-    .relation(ItemEntity, 'categories')
+    .relation(CategoryEntity, 'items')
     .of(categoryId)
     .add(items);
   } catch (error) {
     throw new InvoiceError(errorType.dataBase, '', error);
   }
 };
-

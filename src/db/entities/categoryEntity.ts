@@ -25,6 +25,6 @@ export class CategoryEntity {
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)', onUpdate: 'CURRENT_TIMESTAMP(6)' })
   updatedAt!: Date;
 
-  @ManyToMany(() => ItemEntity, (item) => item.categories)
+  @ManyToMany(() => ItemEntity, (item) => item.categories,  { cascade: true })
   items!: ItemEntity[];
 }
