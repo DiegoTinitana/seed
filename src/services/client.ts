@@ -84,3 +84,15 @@ export const deactivateClientById = async (
     throw new InvoiceError('db', '', err);
   }
 };
+
+export const getClientByDni = async (dni: string): Promise<NewClientI | null> => {
+  try {
+    const query = AppDataSource.getRepository(ClientEntity);
+    const clientEntitie = await query.findOne({
+      where: { dni }
+    });
+    return clientEntitie;
+  } catch (err) {
+    throw new InvoiceError('db', '', err);
+  }
+};

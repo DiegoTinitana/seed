@@ -6,6 +6,7 @@ import Client from './client';
 import Provider from './provider';
 import Item from './item';
 import Category from './category';
+import Sales from './billOfSales';
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.use(Client);
 router.use(Provider);
 router.use(Item);
 router.use(Category);
+router.use(Sales);
 
 
 export default router;

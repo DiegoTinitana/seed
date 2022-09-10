@@ -49,11 +49,11 @@ get {{host}}/api/user
 token: bearer {{token}}
 
 ### get User by Id
-get {{host}}/api/user/1bc81c05-c5da-43aa-b8ac-b13f24e50cc1
+get {{host}}/api/user/549e92ff-f483-47ac-9d69-a4856389f150
 token: bearer {{token}}
 
 ### update User
-put {{host}}/api/user/1bc81c05-c5da-43aa-b8ac-b13f24e50cc1
+put {{host}}/api/user/549e92ff-f483-47ac-9d69-a4856389f150
 token: bearer {{token}}
 Content-Type: application/json
 
@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 
 ### delete user
-delete {{host}}/api/user/6c34b8d5-c7f2-4bfb-8a38-72205dc31c0c
+delete {{host}}/api/user/549e92ff-f483-47ac-9d69-a4856389f150
 token: bearer {{token}}
 
 ###client
@@ -91,11 +91,11 @@ get {{host}}/api/client
 token: bearer {{token}}
 
 ### get client
-get {{host}}/api/client/a25444d4-6f9e-4206-a120-0367a413d84b
+get {{host}}/api/client/375d5f04-7fd8-44c3-907c-589be4c59bc3
 token: bearer {{token}}
 
 ### update client
-put {{host}}/api/client/a25444d4-6f9e-4206-a120-0367a413d84b
+put {{host}}/api/client/375d5f04-7fd8-44c3-907c-589be4c59bc3
 token: bearer {{token}}
 Content-Type: application/json
 
@@ -119,10 +119,10 @@ token: bearer {{token}}
 Content-Type: application/json
 
 {
-  "name": "leche",
-  "description": "es un lecje",
-  "code": "L001",
-  "barCode": "L001",
+  "name": "Carne",
+  "description": "es un carne",
+  "code": "A001",
+  "barCode": "A001",
   "hasIva": true,
   "purchasePrice": 20,
   "pvps": [
@@ -139,16 +139,16 @@ get {{host}}/api/item
 token: bearer {{token}}
 
 ### get by id
-get {{host}}/api/item/aed5e249-aaeb-4cf3-ab2e-e463ba8ab370
+get {{host}}/api/item/d9a5dcf7-3d64-41ef-8efb-5beb8e4a9b4d
 token: bearer {{token}}
 
 ### get by code or barcode
 get {{host}}/api/item/code
-    ?code=b001
+    ?code=L001
 token: bearer {{token}}
 
 ### update
-put {{host}}/api/item/aed5e249-aaeb-4cf3-ab2e-e463ba8ab370
+put {{host}}/api/item/d9a5dcf7-3d64-41ef-8efb-5beb8e4a9b4d
 token: bearer {{token}}
 Content-Type: application/json
 
@@ -208,11 +208,11 @@ get {{host}}/api/provider
 token: bearer {{token}}
 
 ### get by id
-{{host}}/api/provider/a9b993cc-7f6d-4a41-9b42-9cfdbd62a65a
+{{host}}/api/provider/81baed53-e44e-406f-b192-8aa61fb02c2c
 token: bearer {{token}}
 
 ### update
-put {{host}}/api/provider/a9b993cc-7f6d-4a41-9b42-9cfdbd62a65a
+put {{host}}/api/provider/81baed53-e44e-406f-b192-8aa61fb02c2c
 token: bearer {{token}}
 Content-Type: application/json
 
@@ -225,7 +225,7 @@ Content-Type: application/json
 }
 
 ### delete
-delete {{host}}/api/provider/a9b993cc-7f6d-4a41-9b42-9cfdbd62a65a
+delete {{host}}/api/provider/81baed53-e44e-406f-b192-8aa61fb02c2c
 token: bearer {{token}}
 
 # end provider
@@ -278,12 +278,12 @@ token: bearer {{token}}
 Content-Type: application/json
 
 ### get by id
-get {{host}}/api/category/d8979afd-c822-4934-918c-cba52bad6270
+get {{host}}/api/category/62ee1daf-b44f-4ba3-af9a-57c7d1264518
 token: bearer {{token}}
 Content-Type: application/json
 
 ### update
-put {{host}}/api/category/d8979afd-c822-4934-918c-cba52bad6270
+put {{host}}/api/category/62ee1daf-b44f-4ba3-af9a-57c7d1264518
 token: bearer {{token}}
 Content-Type: application/json
 
@@ -293,7 +293,7 @@ Content-Type: application/json
 }
 
 ### set category by id to items
-post {{host}}/api/category/items?id=d8979afd-c822-4934-918c-cba52bad6270
+post {{host}}/api/category/items?id=62ee1daf-b44f-4ba3-af9a-57c7d1264518
 token: bearer {{token}}
 Content-Type: application/json
 
@@ -301,5 +301,53 @@ Content-Type: application/json
   "items" : ["aed5e249-aaeb-4cf3-ab2e-e463ba8ab370"]
 }
 
+#end category
 
+# start sales
+### create
+post {{host}}/api/sales
+token: bearer {{token}}
+Content-Type: application/json
+
+{
+  "dni": "12344432",
+  "date": "2022-09-09",
+  "details": [
+    {
+      "id": "cc196daa-306f-11ed-a261-0242ac120002",
+      "amount": 2,
+      "pvp": 1
+    },
+    {
+      "id": "169ee313-384a-4584-ba65-251f4e534ed9",
+      "amount": 1,
+      "pvp": 1
+    },
+    {
+      "id": "ce2d68d2-a431-4a37-a3c7-6d4805dc862b",
+      "amount": 1,
+      "pvp": 1
+    },
+        {
+      "id": "d57b8a9c-8cb8-423d-b4a5-a6befea90b4b",
+      "amount": 1,
+      "pvp": 1
+    },
+    {
+      "id": "7d096b98-3d0f-4aea-ab45-293cefee6dfb",
+      "amount": 1,
+      "pvp": 1
+    },
+    {
+      "id": "31236f9e-df7d-4aa4-a462-4fa96f026908",
+      "amount": 1,
+      "pvp": 1
+    }
+  ]
+}
+
+### get All
+get {{host}}/api/sales
+token: bearer {{token}}
+Content-Type: application/json
 

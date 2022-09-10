@@ -80,6 +80,18 @@ export const getItems = async (): Promise<NewItemsI[]> => {
   }
 };
 
+export const getItemsByIds = async (ids: string[]): Promise<NewItemsI[]> => {
+  try {
+    const query = AppDataSource.getRepository(ItemEntity);
+    return await query
+      .createQueryBuilder('items')
+      .where('items.id IN (:...ids)', { ids })
+      .getMany();
+  } catch (error) {
+    throw new InvoiceError(errorType.dataBase, '', error);
+  }
+};
+
 export const getItemById = async (id: string): Promise<NewItemsI | null> => {
   try {
     const query = AppDataSource.getRepository(ItemEntity);

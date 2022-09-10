@@ -15,10 +15,7 @@ export class insertRolToAccess1661168420066 implements MigrationInterface {
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/user/:id', 'DELETE',  '[${superAdmin}]')`);
         /*phones*/
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/phone', 'POST',  '[${adminAndSuperAdmin}]')`);
-        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/phone', 'GET',  '[${all}]')`);
-        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/phone/:id', 'GET',  '[${all}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/phone/:id', 'PUT',  '[${adminAndSuperAdmin}]')`);
-        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/phone/:id', 'DELETE',  '[${superAdmin}]')`);
         /*address*/
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/address', 'POST',  '[${adminAndSuperAdmin}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/address', 'GET',  '[${all}]')`);
@@ -55,13 +52,20 @@ export class insertRolToAccess1661168420066 implements MigrationInterface {
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/:id', 'GET',  '[${all}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/code', 'GET',  '[${all}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/:id', 'PUT',  '[${adminAndSuperAdmin}]')`);
-        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/:id', 'DELETE',  '[${superAdmin}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/item/categories', 'POST',  '[${adminAndSuperAdmin}]')`);
         /*category*/
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category', 'POST',  '[${adminAndSuperAdmin}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category', 'GET',  '[${all}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category/:id', 'GET',  '[${all}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category/:id', 'PUT',  '[${adminAndSuperAdmin}]')`);
         await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category/:id', 'DELETE',  '[${superAdmin}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/category/items', 'POST',  '[${adminAndSuperAdmin}]')`);
+        /*category*/
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/sales', 'POST',  '[${adminAndSuperAdmin}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/sales', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/sales/user', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/sales/:id', 'GET',  '[${all}]')`);
+        await queryRunner.query(`INSERT INTO access ("route", "method", "roles") VALUES ('/sales/:id', 'PUT',  '[${adminAndSuperAdmin}]')`);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class newroles1662127619045 implements MigrationInterface {
+export class newroles1662748412934 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query('INSERT INTO roles (name) VALUES (\'SuperAdmin\')');
